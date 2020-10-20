@@ -1,7 +1,6 @@
 /**
  * Module dependencies.
  */
-const express = require('express');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,7 +8,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
-
+// app
+const app = express();
+// bring routes
+const routes = require("./routes");
+// port
+const port = process.env.PORT || 8000;
 /**
  * Start Express server.
  */
