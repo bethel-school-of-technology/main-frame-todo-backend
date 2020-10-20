@@ -10,7 +10,7 @@ var logger = require('morgan');
 const chalk = require('chalk');
 const mongoose = require('mongoose');
 var app = express();
-module.exports = app;
+
 function newFunction() {
   view; engine; setup;
 }
