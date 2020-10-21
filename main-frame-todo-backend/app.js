@@ -12,8 +12,8 @@ const mongoose = require('mongoose');
 const app = express();
 // bring routes
 const routes = require("./routes");
-// port
-const port = process.env.PORT || 8000;
+//roots
+/** text here//** */
 /**
  * Start Express server.
  */
