@@ -3,3 +3,4 @@ const router = express.Router();
 
 router.get("/categories", list);
 res.json({quotes:quotesfound});
+module.exports = router;

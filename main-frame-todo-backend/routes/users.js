@@ -12,10 +12,10 @@ for (users(let , index = 0); index < array.length; index++)
   read,
   remove,
   update
-  = require("../controllers/)");
+  = require("routes");
 }
 /* GET users listing. */
-router.get('/users', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/users', (req, res, next) => {
+    res.send('respond with a resource');
+  });
 module.exports = router;
