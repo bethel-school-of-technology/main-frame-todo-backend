@@ -4,12 +4,18 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+const bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const chalk = require('chalk');
-const mongoose = require('mongoose');
+const mongoose = require('./db/mongoose');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 // app
 const app = express();
+//db models 
+const { User } = require('./db/models/user.model');
+const { Task } = require('./db/models/task.model');
 //app routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -19,36 +25,37 @@ app.get('/.routes/', (req, res) => {
   //return routes
 })
 //roots
+app.use(bodyParser.json());
+
+app.get('/user', (req, res) => {
+    User.find({}).then((users) =>{
+        res.send(users);
+    });
+});
 /** text here//** */
-/**
- * Start Express server.
- */
+app.post('/user', (req, res) => {
+  let title = req.body.title;
+
+  let newUser = new User({
+    title
+  });
+  newUser.save().then((userDoc) => {
+    res.send(userDoc);
+  })
+});
+
+app.patch('/user/:id', (req, res) => {
+
+});
+
+app.delete('/user/:id', (req, res) => {
+
+});
+/* Start Express server.
+*/
 app.listen(app.get('port'), () => {
   console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
   console.log('  Press CTRL-C to stop\n');
 });
-/**
- * Connect to MongoDB.
- */
-mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI);
-mongoose.connection.on('error', (err) => {
-  console.error(err);
-  console.log('%s MongoDB connection error. Please make sure MongoDB is running.', chalk.red('✗'));
-  process.exit();
-});
-app.use(function(req, res, next) {
-  next(createError(404));
-});
 
-
-app.use(function(err, req, res, next) {
-  
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  
-  res.status(err.status || 500);
-  res.render('error');
-});
 module.exports = app;
