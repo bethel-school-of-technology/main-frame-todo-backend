@@ -1,11 +1,8 @@
-const { Model } = require("mongoose");
-//require mongoose
 const mongoose = require('mongoose');
+//require mongoose
 var schema = mongoose.Schema;
 //define schema
-const contactSchema = new mongoose.Schema;
-
-var contact = newSchema({
+const TaskSchema = new mongoose.Schema({
     Contact: {
         name: String,
         phone: Number,
@@ -19,12 +16,12 @@ var contact = newSchema({
         maxlength: [40, 'name name maximum character length exceeded'],
         minlength: [10, 'name name mininum character length not met']
       },
-    Contacts: String,
-    Model: String,
-    a_date: Date,
-    method: String,
-    email: String
+      email: {
+          a_date: Date,
+          method: String,
+          email: String
+      }
 });
 //compile from schema
-var ContactModel = mongoose.model('Contact', contact)
-module.exports = ContactModel;
+const Contact = mongoose.model('Contact', contactSchema);
+module.exports = { Contact };
