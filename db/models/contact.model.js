@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 //require mongoose
 var schema = mongoose.Schema;
 //define schema
-const TaskSchema = new mongoose.Schema({
+const ContactSchema = new mongoose.Schema({
     Contact: {
         name: String,
         phone: Number,
@@ -23,5 +23,5 @@ const TaskSchema = new mongoose.Schema({
       }
 });
 //compile from schema
-const Contact = mongoose.model('Contact', contactSchema);
+const Contact = mongoose.model('Contact', ContactSchema);
 module.exports = { Contact };
