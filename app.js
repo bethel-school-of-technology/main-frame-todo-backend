@@ -10,7 +10,7 @@ var logger = require('morgan');
 const chalk = require('chalk');
 const mongoose = require('./db/mongoose');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/user');
+var userRouter = require('./routes/user');
 // app
 const app = express();
 //db models 
@@ -18,7 +18,7 @@ const { User } = require('./db/models/user.model');
 const { Task } = require('./db/models/task.model');
 //app routes
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
 // bring routes
 const routes = require("./routes");
 app.get('/.routes/', (req, res) => {
@@ -28,9 +28,9 @@ app.get('/.routes/', (req, res) => {
 app.use(bodyParser.json());
 
 app.get('/user', (req, res) => {
-    User.find({}).then((users) =>{
-        res.send(users);
-    });
+  User.find({}).then((users) => {
+    res.send(users);
+  });
 });
 /** text here//** */
 app.post('/user', (req, res) => {
@@ -49,6 +49,30 @@ app.patch('/user/:id', (req, res) => {
 });
 
 app.delete('/user/:id', (req, res) => {
+
+});
+
+app.get('/task/', (req, res) => {
+  Task.find({}).then(() => {
+    res.send(tasks);
+  });
+});
+app.post('/task/', (req, res, next) => {
+  let title = req.body.title;
+
+  let newTask = new Task({
+    title
+  });
+  newTask.save().then((taskDoc) => {
+    res.send(taskDoc);
+  })
+});
+
+app.patch('/task', (req, res) => {
+
+});
+
+app.delete('/task', (req, res) => {
 
 });
 /* Start Express server.
