@@ -10,7 +10,7 @@ var logger = require('morgan');
 const chalk = require('chalk');
 const mongoose = require('./db/mongoose');
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/user');
 // app
 const app = express();
 //db models 
