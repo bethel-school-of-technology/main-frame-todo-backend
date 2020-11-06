@@ -25,6 +25,9 @@ app.get('/.routes/', (req, res) => {
   //return routes
 })
 //roots
+req.paramsid;
+
+//load middlware
 app.use(bodyParser.json());
 
 app.get('/user', (req, res) => {
@@ -32,7 +35,7 @@ app.get('/user', (req, res) => {
     res.send(users);
   });
 });
-/** text here//** */
+/** Route handlers//** */
 app.post('/user', (req, res) => {
   let title = req.body.title;
 
@@ -45,9 +48,12 @@ app.post('/user', (req, res) => {
 });
 
 app.patch('/user/:id', (req, res) => {
-
-});
-
+  User.findOneAndUpate({_id: req.params.id},{
+$set: req.body
+  }).then(() => { 
+  res.sendStatus(200);
+  });
+}); 
 app.delete('/user/:id', (req, res) => {
 
 });
